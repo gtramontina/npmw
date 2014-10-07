@@ -21,7 +21,7 @@ Another example is `ionic`, which also requires `cordova` as a global module. Us
 
 And your project is pretty munch self-contained! Win!
 
-### What about `npm exec`
+### What about `npm exec`?
 Well, as of the time of this write up, `npm exec` does not currently support passing arguments. You should just use that once it does.
 
 ## Installation
