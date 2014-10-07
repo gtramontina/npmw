@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var cwd = process.cwd();
+var resolve = require('path').resolve;
+var pkg = require('../package.json');
+
+var root = resolve(cwd.slice(0, cwd.indexOf(/node_modules/)));
+
+var template =
+  fs.readFileSync(resolve('./lib/npmw.template'), 'UTF-8')
+  .replace(/{{name}}/g, pkg.name)
+  .replace(/{{version}}/g, pkg.version);
+
+var wrapper = resolve(root, pkg.name);
+fs.writeFileSync(wrapper, template);
+fs.chmod(wrapper, '755');
