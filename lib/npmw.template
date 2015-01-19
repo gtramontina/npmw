@@ -12,4 +12,5 @@ var spawn = require('child_process').spawn;
 var binPath = __dirname + '/node_modules/.bin';
 process.env.PATH += ':' + binPath;
 
-spawn(tool, args, { env: process.env, stdio: 'inherit' });
+spawn(tool, args, { env: process.env, stdio: 'inherit' })
+  .on('exit', function (code) { process.exit(code); })
