@@ -8,10 +8,20 @@
 var args = process.argv.slice(2);
 var resolve = require('path').resolve;
 var tool = args.shift();
+var errno = require('npmw/node_modules/errno');
+var pkg = require('npmw/package');
 
 var spawn = require('child_process').spawn;
 var binPath = __dirname + '/node_modules/.bin';
 process.env.PATH += ':' + resolve(binPath);
 
+function handleError (error) {
+  error = errno.code[error.errno] || error;
+  error.message = error.description || error.message;
+  console.error(pkg.name+':', error.message+':', tool);
+  process.exit(error.errno || 1);
+}
+
 spawn(tool, args, { env: process.env, stdio: 'inherit' })
-  .on('exit', function (code) { process.exit(code); })
+  .on('error', handleError)
+  .on('exit', process.exit);

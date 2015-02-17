@@ -18,5 +18,9 @@
 
   "scripts"       : {
     "install"     : "./bin/install"
+  },
+
+  "dependencies"  : {
+    "errno"       : "^0.1.1"
   }
 }
