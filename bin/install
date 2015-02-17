@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 var fs = require('fs');
-var cwd = process.cwd();
 var resolve = require('path').resolve;
 var pkg = require('../package.json');
-
-var root = resolve(cwd.slice(0, cwd.indexOf(/node_modules/)));
+var cwd = process.cwd();
+var root = cwd.replace(/node_modules(?!.*node_modules(\/|\\|$)).*/, '');
+root = resolve(root);
 
 var template =
   fs.readFileSync(resolve('./lib/npmw.template'), 'UTF-8')

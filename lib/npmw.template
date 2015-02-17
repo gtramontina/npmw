@@ -6,11 +6,12 @@
 // ############################################################################
 
 var args = process.argv.slice(2);
+var resolve = require('path').resolve;
 var tool = args.shift();
 
 var spawn = require('child_process').spawn;
 var binPath = __dirname + '/node_modules/.bin';
-process.env.PATH += ':' + binPath;
+process.env.PATH += ':' + resolve(binPath);
 
 spawn(tool, args, { env: process.env, stdio: 'inherit' })
   .on('exit', function (code) { process.exit(code); })
